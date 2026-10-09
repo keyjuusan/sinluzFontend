@@ -47,6 +47,7 @@ export default function Mapa() {
   return (
     <LeafletMap>
       {/*<InfoClickMap />*/}
+      {/* @ts-ignore */}
       <ModernHeatmapLayer points={coordenadasReportes} />
     </LeafletMap>
   );

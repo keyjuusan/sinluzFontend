@@ -1,7 +1,7 @@
 import BtnReportar from "./BtnReportar";
 import {Toaster} from "react-hot-toast"
 
-export default function Menu({ setVerMapa }) {
+export default function Menu({ setVerMapa }:{setVerMapa:(bool:boolean)=>void}) {
   return (
     <div className="bg-gray-950 w-full h-full absolute top-0 justify-center flex items-center flex-col gap-10">
       <h1 className="text-4xl">¿Se te fue la luz?</h1>

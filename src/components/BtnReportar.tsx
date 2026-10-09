@@ -60,7 +60,7 @@ export default function BtnReportar({
   return (
     <button
       {...restProps}
-      onClick={() => reportarApagon(reporte)}
+      onClick={() => reportarApagon()}
       className={`bg-red-600 text-xl text-white p-2 rounded cursor-pointer active:shadow-none w-24.75 disabled:shadow-none disabled:bg-red-400 flex justify-center ${className}`}
       disabled={loading ? true : false}
     >
