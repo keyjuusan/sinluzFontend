@@ -1,0 +1,10 @@
+name: sinluz_client
+services:
+  app:
+    build:
+      context: .
+    ports:
+      - "5173:5173"
+    volumes:
+      - ./src/:/app/src/:ro
+    env_file: ./.env
