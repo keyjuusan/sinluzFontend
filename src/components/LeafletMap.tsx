@@ -19,7 +19,6 @@ export default function LeafletMap({children}:PropsWithChildren) {
         {children}
 
       </MapContainer>
-      <button className="absolute top-0 right-0 bg-amber-50">Tocame</button>
     </div>
   );
 }
