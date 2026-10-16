@@ -1,5 +1,5 @@
 import { miApi } from "@/lib/axios/api";
-import type { ReporteResponseType, ReporteType } from "@/types";
+import type { ReporteResponseType} from "@/types";
 import { extraerCoordenadas } from "@/utils";
 import { useEffect, useState } from "react";
 

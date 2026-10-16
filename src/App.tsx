@@ -12,7 +12,7 @@ function App() {
 
   // 1. Modificamos el tipo del estado para soportar [lat, lng, intensidad?]
   const [coordenadasReportes, setCoordenadasReportes] =
-    useState<[number, number, number?][]>();
+    useState<[number, number, number?][]>([]);
   useEffect(() => {
     miApi
       .get<ReporteResponseType>("/reportes")
