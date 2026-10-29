@@ -4,8 +4,11 @@ import {Toaster} from "react-hot-toast"
 export default function Menu({ setVerMapa }:{setVerMapa:(bool:boolean)=>void}) {
   return (
     <div className="bg-gray-950 w-full h-full absolute top-0 justify-center flex items-center flex-col gap-10">
-      <h1 className="text-4xl">¿Se te fue la luz?</h1>
-      <div className="flex flex-col gap-4 w-3/10">
+      <div className="flex flex-col gap-2">
+        <h1 className="text-6xl text-blue-600">Venezuela</h1>
+      <h2 className="text-4xl">¿Se te fue la luz?</h2>
+</div>
+      <div className="flex flex-col gap-4 w-4/10">
         <BtnReportar
           className="w-full"
           reporte={{

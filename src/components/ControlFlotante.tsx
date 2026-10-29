@@ -1,7 +1,8 @@
 import { miApi } from "@/lib/axios/api";
-import type { ReporteResponseType} from "@/types";
+import type { ReporteResponseType } from "@/types";
 import { extraerCoordenadas } from "@/utils";
 import { useEffect, useState } from "react";
+import moment from "moment";
 
 interface Props {
   handleClickBtnVolver: () => void;
@@ -9,20 +10,22 @@ interface Props {
 }
 
 const horaActual = new Date().getHours().toString();
+const fechaActual = moment().format("YYYY-MM-DD");
 
 export default function ControlFlotante({
   handleClickBtnVolver,
   setCoordenadasReportes,
 }: Props) {
   const [filtroHora, setFiltroHora] = useState<string>(horaActual);
+  const [filtroFecha, setFiltroFecha] = useState<string>(fechaActual);
 
   useEffect(() => {
     miApi
-      .get<ReporteResponseType>("/reportes", { params: {hora:filtroHora} })
+      .get<ReporteResponseType>("/reportes", { params: { hora: filtroHora,dia: filtroFecha } })
       .then(({ data: { reportes } }) => {
         setCoordenadasReportes(extraerCoordenadas(reportes));
       });
-  }, [filtroHora]);
+  }, [filtroHora,filtroFecha]);
 
   return (
     <>
@@ -32,17 +35,28 @@ export default function ControlFlotante({
       >
         Volver
       </button>
-      <label className="absolute bottom-0 left-1/2 right-1/2 -translate-x-1/2 w-8/10 py-4 flex flex-col items-center" >
-        <p className="text-gray-950 w-fit">{filtroHora}:00 - { Number(filtroHora) == 23 ? 0:Number(filtroHora)+1}:00</p>
-      <input
-        type="range"
-        step="1"
-        min="0"
-        max="23"
-        onChange={(e) => setFiltroHora(e.target.value)}
-        value={filtroHora}
-        className=" w-full"
-      />
+      <label className="absolute bottom-0 left-1/2 right-1/2 -translate-x-1/2 w-8/10 py-4 flex flex-col items-center">
+        <p className="text-gray-950 w-fit">
+          {filtroHora}:00 -{" "}
+          {Number(filtroHora) == 23 ? 0 : Number(filtroHora) + 1}:00
+        </p>
+        <input
+          type="range"
+          step="1"
+          min="0"
+          max="23"
+          onChange={(e) => setFiltroHora(e.target.value)}
+          value={filtroHora}
+          className=" w-full"
+        />
+      </label>
+      <label className="absolute top-0 left-1/2 -translate-x-1/2 text-gray-950 border mt-4 ">
+        <input
+          type="date"
+          value={filtroFecha}
+          onChange={(e) => setFiltroFecha(e.target.value)}
+          className="bg-amber-50 p-2 outline-0 rounded"
+        />
       </label>
     </>
   );
