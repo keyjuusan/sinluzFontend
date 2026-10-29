@@ -3,6 +3,7 @@ import type { ReporteResponseType } from "@/types";
 import { extraerCoordenadas } from "@/utils";
 import { useEffect, useState } from "react";
 import moment from "moment";
+import { Ripple } from "./loading-ui/ripple";
 
 interface Props {
   handleClickBtnVolver: () => void;
@@ -18,17 +19,20 @@ export default function ControlFlotante({
 }: Props) {
   const [filtroHora, setFiltroHora] = useState<string>(horaActual);
   const [filtroFecha, setFiltroFecha] = useState<string>(fechaActual);
+  const [loading,setLoading] = useState(false)
 
   useEffect(() => {
+    setLoading(true)
     miApi
       .get<ReporteResponseType>("/reportes", { params: { hora: filtroHora,dia: filtroFecha } })
       .then(({ data: { reportes } }) => {
         setCoordenadasReportes(extraerCoordenadas(reportes));
-      });
+      }).finally(()=>setLoading(false));
   }, [filtroHora,filtroFecha]);
 
   return (
     <>
+      {loading?<Ripple className="size-10 text-center absolute stroke-blue-600 top-0 left-0 m-4" />:null}
       <button
         onClick={() => handleClickBtnVolver()}
         className="absolute top-4 right-4 bg-gray-900 text-white p-2 rounded shadow-md"
